@@ -129,13 +129,12 @@ function analyzeSalesData(data, options) {
     // top-10 of products
 
         seller.top_products = Object.entries(seller.products_sold)
-            .map(([sku,quantity]) => ({sku, quantity }))
-            // .sort((a, b) => b.quantity - a.quantity || a.sku.localeCompare(b.sku))
+            .map(([sku, quantity]) => ({ sku, quantity }))
             .sort((a, b) => {
                 if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-                return a.sku < b.sku ? -1 : a.sku > b.sku ? 1 : 0// ← полное сравнение строки
-            })
-            .slice(0, 10);
+                return a.sku.localeCompare(b.sku);
+                })
+            .slice(0, 10)
     });
     // @TODO: Назначение премий на основе ранжирования
 
