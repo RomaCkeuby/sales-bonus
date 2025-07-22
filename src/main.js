@@ -127,8 +127,6 @@ function analyzeSalesData(data, options) {
         seller.bonus = calculateBonus(index, sellerStats.length, seller);   
 
     // top-10 of products
-        console.log("Продавец:", seller.name);
-        console.log("Продукты проданы:", seller.products_sold);
 
 
     //     seller.top_products = Object.entries(seller.products_sold)
@@ -168,5 +166,3 @@ function analyzeSalesData(data, options) {
         bonus: +seller.bonus.toFixed(2)
     }));
 }
-
-console.log(seller.top_products)
