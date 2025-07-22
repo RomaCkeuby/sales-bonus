@@ -149,7 +149,7 @@ function analyzeSalesData(data, options) {
             return getSkuNumber(b.sku) - getSkuNumber(a.sku); // <-- вот это ключевой момент
         })
         .slice(0, 10);
-
+    });
 
 
     // @TODO: Назначение премий на основе ранжирования
