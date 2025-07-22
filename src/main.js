@@ -144,7 +144,7 @@ function analyzeSalesData(data, options) {
         .map(([sku, quantity]) => ({ sku, quantity }))
         .sort((a, b) => {
             if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-            return getSkuNumber(b.sku) - getSkuNumber(a.sku); // сортировка по убыванию номера
+            return getSkuNumber(a.sku) - getSkuNumber(b.sku); // сортировка по убыванию номера
         })
         .slice(0, 10);
     });
