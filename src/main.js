@@ -4,9 +4,9 @@
  * @param _product карточка товара
  * @returns {number}
  */
-function calculateSimpleRevenue(purchase, _product) {
-   // @TODO: Расчет выручки от операции
-}
+// function calculateSimpleRevenue(purchase, _product) {
+//    // @TODO: Расчет выручки от операции
+// }
 
 /**
  * Функция для расчета бонусов
