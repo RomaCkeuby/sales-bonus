@@ -128,14 +128,28 @@ function analyzeSalesData(data, options) {
 
     // top-10 of products
 
-        seller.top_products = Object.entries(seller.products_sold)
-            .map(([sku, quantity]) => ({ sku, quantity }))
-            .sort((a, b) => {
-                if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-                return b.sku.localeCompare(a.sku);
-            })
-            .slice(0, 10);
-    });
+    //     seller.top_products = Object.entries(seller.products_sold)
+    //         .map(([sku, quantity]) => ({ sku, quantity }))
+    //         .sort((a, b) => {
+    //             if (b.quantity !== a.quantity) return b.quantity - a.quantity;
+    //             return b.sku.localeCompare(a.sku);
+    //         })
+    //         .slice(0, 10);
+    // });
+
+    function getSkuNumber(sku) {
+        return parseInt(sku.replace(/\D/g, ""), 10);
+    }
+    seller.top_products = Object.entries(seller.products_sold)
+    .map(([sku, quantity]) => ({ sku, quantity }))
+    .sort((a, b) => {
+        if (b.quantity !== a.quantity) return b.quantity - a.quantity;
+        return getSkuNumber(b.sku) - getSkuNumber(a.sku); // сортировка по убыванию номера
+    })
+    .slice(0, 10);
+
+
+
     // @TODO: Назначение премий на основе ранжирования
 
     //
