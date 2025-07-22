@@ -131,10 +131,13 @@ function analyzeSalesData(data, options) {
         seller.top_products = Object.entries(seller.products_sold)
             .map(([sku, quantity]) => ({ sku, quantity }))
             .sort((a, b) => {
-                if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-                return a.sku.localeCompare(b.sku);
-                })
-            .slice(0, 10)
+                if (b.quantity !== a.quantity) return b.quantity - a.quantity;             
+                // сравнение по числу после SKU_
+                const numA = parseInt(a.sku.slice(4), 10);
+                const numB = parseInt(b.sku.slice(4), 10);
+                return numA - numB;
+            })
+            .slice(0, 10);
     });
     // @TODO: Назначение премий на основе ранжирования
 
