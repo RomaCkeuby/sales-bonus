@@ -37,9 +37,8 @@ function calculateSimpleRevenue(purchase, _product) {
 
    const decimalDiscount = discount / 100; // Преобразуем процент в десятичную дробь
    const totalPrice = sale_price * quantity; // Общая цена без скидки
-   const fullyDiscountedPrice = totalPrice * (1 - decimalDiscount); // Цена с учётом скидки
-
-
+   const revenue = totalPrice * (1 - decimalDiscount); // Цена с учётом скидки
+    return revenue;
 }
 
 /**
