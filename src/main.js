@@ -133,10 +133,7 @@ function analyzeSalesData(data, options) {
             // .sort((a, b) => b.quantity - a.quantity || a.sku.localeCompare(b.sku))
             .sort((a, b) => {
                 if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-                // сортировка по числовой части SKU
-                const numA = parseInt(a.sku.match(/\d+/)[0], 10);
-                const numB = parseInt(b.sku.match(/\d+/)[0], 10);
-                return numA - numB;
+                return a.sku.localeCompare(b.sku); // ← полное сравнение строки
             })
             .slice(0, 10);
     });
