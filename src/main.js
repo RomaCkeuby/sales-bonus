@@ -127,15 +127,28 @@ function analyzeSalesData(data, options) {
         seller.bonus = calculateBonus(index, sellerStats.length, seller);   
 
     // top-10 of products
+        console.log("Продавец:", seller.name);
+        console.log("Продукты проданы:", seller.products_sold);
 
-        seller.top_products = Object.entries(seller.products_sold)
-            .map(([sku, quantity]) => ({ sku, quantity }))
-            .sort((a, b) => {
-                if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-                return a.sku.localeCompare(b.sku);
-            })
-            .slice(0, 10);
-    });
+
+    //     seller.top_products = Object.entries(seller.products_sold)
+    //         .map(([sku, quantity]) => ({ sku, quantity }))
+    //         .sort((a, b) => {
+    //             if (b.quantity !== a.quantity) return b.quantity - a.quantity;
+    //             return a.sku.localeCompare(b.sku);
+    //         })
+    //         .slice(0, 10);
+    // });
+
+    const getSkuNumber = sku => parseInt(sku.replace(/\D/g, ""), 10);
+
+    seller.top_products = Object.entries(seller.products_sold)
+        .map(([sku, quantity]) => ({ sku, quantity }))
+        .sort((a, b) => {
+            if (b.quantity !== a.quantity) return b.quantity - a.quantity;
+            return getSkuNumber(b.sku) - getSkuNumber(a.sku); // <-- вот это ключевой момент
+        })
+        .slice(0, 10);
 
 
 
@@ -156,3 +169,4 @@ function analyzeSalesData(data, options) {
     }));
 }
 
+console.log(seller.top_products)
