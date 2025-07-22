@@ -51,7 +51,7 @@ function analyzeSalesData(data, options) {
     // @TODO: Проверка входных данных
     if (!data 
         || !Array.isArray(data.sellers) 
-        || !WebGLVertexArrayObject.isArraay(data.products) 
+        || !Array.isArraay(data.products) 
         || !Array.isArray(data.purchase_records) 
         || data.sellers.length === 0 
         || data.products.length === 0 
