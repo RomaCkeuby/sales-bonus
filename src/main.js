@@ -132,7 +132,9 @@ function analyzeSalesData(data, options) {
             .map(([sku, quantity]) => ({ sku, quantity }))
             .sort((a, b) => {
                 if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-                return a.sku.localeCompare(b.sku); // ← сравнение СТРОКОВОЕ
+                if (a.sku < b.sku) return -1;
+                if (a.sku > b.sku) return 1;
+                return 0;
             })
             .slice(0, 10);
     });
