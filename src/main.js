@@ -121,6 +121,7 @@ function analyzeSalesData(data, options) {
     })
 
     // @TODO: Сортировка продавцов по прибыли
+    sellerStats.sort((a, b) => b.profit - a.profit || a.id.localeCompare(b.id));
 
     sellerStats.forEach((seller, index) => {
         seller.bonus = calculateBonus(index, sellerStats.length, seller);   
@@ -129,7 +130,7 @@ function analyzeSalesData(data, options) {
 
         seller.top_products = Object.entries(seller.products_sold)
             .map(([sku,quantity]) => ({sku, quantity }))
-            .sort((a, b) => b.quantity - a.quantity)
+            .sort((a, b) => b.quantity - a.quantity || a.sku.localeCompare(b.sku))
             .slice(0, 10);
     });
     // @TODO: Назначение премий на основе ранжирования
@@ -143,7 +144,7 @@ function analyzeSalesData(data, options) {
         name: seller.name,
         revenue: +seller.revenue.toFixed(2),
         profit: +seller.profit.toFixed(2),
-        sellers_count: seller.sales_count,
+        seles_count: seller.sales_count,
         top_products: seller.top_products,
         bonus: +seller.bonus.toFixed(2)
     }));
