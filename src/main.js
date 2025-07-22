@@ -128,15 +128,16 @@ function analyzeSalesData(data, options) {
 
     // top-10 of products
 
-        seller.top_products = Object.entries(seller.products_sold)
-            .map(([sku, quantity]) => ({ sku, quantity }))
-            .sort((a, b) => {
-                if (b.quantity !== a.quantity) return b.quantity - a.quantity;
-                return a.sku.localeCompare(b.sku);
-            })
+        const topProducts = Object.entries(seller.products_sold)
+            .map(([sku, quantity]) => ({
+                sku,
+                quantity
+            }))
+            .sort((a, b) => b.quantity - a.quantity)
             .slice(0, 10);
-    });
 
+        seller.top_products = topProducts;
+        });
     // @TODO: Назначение премий на основе ранжирования
 
     //
